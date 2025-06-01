@@ -18,7 +18,7 @@ os.environ["TOKENIZERS_PARALLELISM"] = "false"
 load_dotenv()
 
 # Ensure the PDF file exists
-pdf_path = Path("data/ram_awa_interview.pdf")
+pdf_path = Path("data/current_april_2025_vol_9.pdf")
 if not pdf_path.exists():
     raise FileNotFoundError(f"PDF file not found: {pdf_path}")
 

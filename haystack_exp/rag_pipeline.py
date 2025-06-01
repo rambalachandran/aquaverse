@@ -82,6 +82,6 @@ def ask_question(question: str, api_key: str) -> str:
         "text_embedder": {"text": question}
     })
     
-    answer = result["llm"]["replies"][0].content 
+    answer = result["llm"]["replies"][0].text 
     print(f"Answer: {answer}")
     return answer
