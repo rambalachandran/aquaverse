@@ -13,7 +13,7 @@ fetcher = LinkContentFetcher()
 converter = HTMLToDocument()
 prompt_template = [
     ChatMessage.from_user(
-      """
+        """
       According to the contents of this website:
       {% for document in documents %}
         {{document.content}}
@@ -37,14 +37,22 @@ pipeline.connect("fetcher.streams", "converter.sources")
 pipeline.connect("converter.documents", "prompt.documents")
 pipeline.connect("prompt.prompt", "llm")
 
-result = pipeline.run({"fetcher": {"urls": ["https://haystack.deepset.ai/overview/quick-start"]},
-              "prompt": {"query": "Which components do I need for a RAG pipeline?"}})
+result = pipeline.run(
+    {
+        "fetcher": {"urls": ["https://haystack.deepset.ai/overview/quick-start"]},
+        "prompt": {"query": "Which components do I need for a RAG pipeline?"},
+    }
+)
 
 print(result["llm"]["replies"][0].text)
 
 # %%
 # run sample fetch from hacker news
-result = pipeline.run({"fetcher": {"urls": ["https://news.ycombinator.com"]},
-              "prompt": {"query": "What are the top 10 posts in hacker news today?"}})
+result = pipeline.run(
+    {
+        "fetcher": {"urls": ["https://news.ycombinator.com"]},
+        "prompt": {"query": "What are the top 10 posts in hacker news today?"},
+    }
+)
 
 print(result["llm"]["replies"][0].text)

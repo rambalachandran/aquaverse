@@ -14,8 +14,10 @@ from haystack.components.generators.chat import OpenAIChatGenerator
 from haystack.dataclasses import ChatMessage
 
 # os.environ["OPENAI_API_KEY"] = "Your OpenAI API Key"
-urllib.request.urlretrieve("https://archive.org/stream/leonardodavinci00brocrich/leonardodavinci00brocrich_djvu.txt",
-                           "davinci.txt")    
+urllib.request.urlretrieve(
+    "https://archive.org/stream/leonardodavinci00brocrich/leonardodavinci00brocrich_djvu.txt",
+    "davinci.txt",
+)
 
 document_store = InMemoryDocumentStore()
 
@@ -27,7 +29,7 @@ writer = DocumentWriter(document_store)
 
 # Does this sequence of components need to be preserved?
 # I think it does, because the documents are converted to a document object, then cleaned, then split, then embedded, then written to the document store.
-# If we change the order of the components, the results will be different.  
+# If we change the order of the components, the results will be different.
 indexing_pipeline = Pipeline()
 indexing_pipeline.add_component("converter", text_file_converter)
 indexing_pipeline.add_component("cleaner", cleaner)
@@ -45,7 +47,7 @@ text_embedder = OpenAITextEmbedder()
 retriever = InMemoryEmbeddingRetriever(document_store)
 prompt_template = [
     ChatMessage.from_user(
-      """
+        """
       Given these documents, answer the question.
       Documents:
       {% for doc in documents %}
@@ -70,7 +72,9 @@ rag_pipeline.connect("retriever.documents", "prompt_builder.documents")
 rag_pipeline.connect("prompt_builder", "llm")
 
 query = "How old was Leonardo when he died?"
-result = rag_pipeline.run(data={"prompt_builder": {"query":query}, "text_embedder": {"text": query}})
+result = rag_pipeline.run(
+    data={"prompt_builder": {"query": query}, "text_embedder": {"text": query}}
+)
 
 print(result["llm"]["replies"][0].text)
 
