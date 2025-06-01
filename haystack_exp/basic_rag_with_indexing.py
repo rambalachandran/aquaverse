@@ -41,7 +41,7 @@ indexing_pipeline.connect("converter.documents", "cleaner.documents")
 indexing_pipeline.connect("cleaner.documents", "splitter.documents")
 indexing_pipeline.connect("splitter.documents", "embedder.documents")
 indexing_pipeline.connect("embedder.documents", "writer.documents")
-indexing_pipeline.run(data={"sources": ["davinci.txt"]})
+indexing_pipeline.run(data={"sources": ["data/davinci.txt"]})
 
 text_embedder = OpenAITextEmbedder()
 retriever = InMemoryEmbeddingRetriever(document_store)

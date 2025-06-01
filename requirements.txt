@@ -1,0 +1,8 @@
+haystack-ai
+python-dotenv
+sentence-transformers
+openai
+qdrant-haystack
+transformers
+torch
+PyPDF2 

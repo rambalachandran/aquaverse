@@ -9,5 +9,6 @@ dependencies = [
     "haystack-ai>=2.14.1",
     "ipykernel>=6.29.5",
     "pypdf>=5.5.0",
+    "qdrant-haystack>=9.1.3",
     "trafilatura>=2.0.0",
 ]
