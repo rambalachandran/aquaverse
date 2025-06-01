@@ -74,7 +74,7 @@ rag_pipeline.connect("prompt_builder", "llm")
 
 # Function to ask questions
 def ask_question(question: str) -> str:
-    print(f"\nQuestion: {question}")
+    # print(f"\nQuestion: {question}")
     result = rag_pipeline.run(data={
         "prompt_builder": {"query": question},
         "text_embedder": {"text": question}
