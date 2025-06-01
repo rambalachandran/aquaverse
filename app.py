@@ -13,6 +13,10 @@ from haystack_exp.rag_pipeline import ask_question #, rag_pipeline # rag_pipelin
 
 st.title("RAM AWA Interview Q&A")
 
+st.sidebar.header("OpenAI API Key")
+openai_api_key = st.sidebar.text_input("Enter your OpenAI API Key:", type="password")
+
+
 st.markdown("""
 This is a simple Q&A demo using a RAG (Retrieval Augmented Generation) system.
 Ask questions about the RAM AWA interview.
@@ -21,8 +25,15 @@ Ask questions about the RAM AWA interview.
 user_question = st.text_input("Ask your question:")
 
 if user_question:
+    if not openai_api_key:
+        st.warning("Please enter your OpenAI API Key in the sidebar to continue.")
+        st.stop()
+    if not openai_api_key.startswith('sk-'):
+        st.warning("Please enter a valid OpenAI API Key, starting with 'sk-'.")
+        st.stop()
+
     with st.spinner("Finding an answer..."):
-        answer = ask_question(user_question)
+        answer = ask_question(user_question, api_key=openai_api_key)
         st.write("Answer:")
         st.write(answer)
 
