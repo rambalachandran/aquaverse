@@ -1,0 +1,23 @@
+{
+    "python.analysis.exclude": [
+        "**/node_modules",
+        "**/__pycache__",
+        "**/build",
+        ".git",
+        "myenv/**",
+        "**/.venv/**",
+    ],
+    "terminal.integrated.env.linux": { "PYTHONPATH": "${workspaceFolder}" },
+    "terminal.integrated.env.osx": { "PYTHONPATH": "${workspaceFolder}" },
+    "terminal.integrated.env.windows": { "PYTHONPATH": "${workspaceFolder}" },
+    "jupyter.notebookFileRoot": "${workspaceFolder}",
+    "dvc.dvcPath": "dvc",
+    "ruff.configuration": "pyproject.toml",
+    "python.analysis.typeCheckingMode": "basic",
+    "python.testing.pytestArgs": [
+        "tests"
+    ],
+    "python.testing.unittestEnabled": false,
+    "python.testing.pytestEnabled": true,
+    "makefile.configureOnOpen": false,
+}

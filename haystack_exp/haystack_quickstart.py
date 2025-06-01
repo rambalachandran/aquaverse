@@ -43,3 +43,8 @@ result = pipeline.run({"fetcher": {"urls": ["https://haystack.deepset.ai/overvie
 print(result["llm"]["replies"][0].text)
 
 # %%
+# run sample fetch from hacker news
+result = pipeline.run({"fetcher": {"urls": ["https://news.ycombinator.com"]},
+              "prompt": {"query": "What are the top 10 posts in hacker news today?"}})
+
+print(result["llm"]["replies"][0].text)
