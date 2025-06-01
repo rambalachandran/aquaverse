@@ -64,13 +64,29 @@ prompt_builder = ChatPromptBuilder(template=prompt_template)
 
 # Function to ask questions - API key is now mandatory
 def ask_question(question: str, api_key: str) -> str:
-    pipeline_to_run = Pipeline()
-    pipeline_to_run.add_component("text_embedder", text_embedder)
-    pipeline_to_run.add_component("retriever", retriever)
-    pipeline_to_run.add_component("prompt_builder", prompt_builder)
+    # Instantiate components locally for each call
+    local_text_embedder = SentenceTransformersTextEmbedder(
+        model=MODEL_ID,  # Uses global MODEL_ID
+        device=ComponentDevice.from_str("cpu"),  # Uses global ComponentDevice
+        normalize_embeddings=True,
+        prefix=""  # as per original global definition
+    )
 
-    # API key is now mandatory, so no 'else' branch needed here for default_llm
+    local_retriever = QdrantEmbeddingRetriever(
+        document_store=document_store  # Uses global document_store
+    )
+
+    # prompt_template is global
+    local_prompt_builder = ChatPromptBuilder(
+        template=prompt_template  # Uses global prompt_template
+    )
+
     user_llm = OpenAIChatGenerator(api_key=Secret.from_token(api_key))
+    
+    pipeline_to_run = Pipeline()
+    pipeline_to_run.add_component("text_embedder", local_text_embedder)
+    pipeline_to_run.add_component("retriever", local_retriever)
+    pipeline_to_run.add_component("prompt_builder", local_prompt_builder)
     pipeline_to_run.add_component("llm", user_llm)
 
     pipeline_to_run.connect("text_embedder.embedding", "retriever.query_embedding")
