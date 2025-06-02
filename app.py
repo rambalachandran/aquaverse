@@ -16,7 +16,7 @@ MAX_HISTORY_LENGTH = 10
                         # this might be better placed inside rag_pipeline.py to run on import.
 
 
-st.title("RAM AWA Interview Q&A")
+st.title("AWA Current Magazine QnA")
 
 st.sidebar.header("OpenAI API Key")
 openai_api_key = st.sidebar.text_input("Enter your OpenAI API Key:", type="password")
@@ -27,7 +27,7 @@ if 'history' not in st.session_state:
 
 st.markdown("""
 This is a simple Q&A demo using a RAG (Retrieval Augmented Generation) system.
-Ask questions about the RAM AWA interview.
+Ask questions about the contents of  AWA Current Magazine .
 """)
 
 # Display chat history (oldest first)
