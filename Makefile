@@ -7,13 +7,13 @@ all: help
 lint_diff: PYTHON_FILES=$(shell git diff --name-only --diff-filter=d master | grep -E '\.py$$')
 
 format:
-	ruff format --exclude '**/*.ipynb' haystack_exp
+	ruff format --exclude '**/*.ipynb' index rag experiments
 
 typecheck:
 	mypy src test
 
 lint:
-	ruff check --fix --exclude '**/*.ipynb' haystack_exp
+	ruff check --fix --exclude '**/*.ipynb' index rag experiments
 
 help:
 	@echo '----'

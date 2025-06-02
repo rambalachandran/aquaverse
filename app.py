@@ -1,9 +1,9 @@
 import os
 os.environ["STREAMLIT_SERVER_ENABLE_FILE_WATCHER"] = "false"
 import streamlit as st
-from haystack_exp.rag_pipeline import ask_question #, rag_pipeline # rag_pipeline is not directly used here anymore
+from rag.rag_pipeline import ask_question #, rag_pipeline # rag_pipeline is not directly used here anymore
 
-# Configuration for conversation history
+# Configuration for conversation history in order of recency
 MAX_HISTORY_LENGTH = 10
 
 # Initialize the RAG pipeline (if not already handled in ask_question or its module)
